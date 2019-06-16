@@ -13,6 +13,8 @@ export interface Item {
   styles: []
 })
 export class FotosComponent implements OnInit {
+  
+  lengthItems:number;
 
   private itemsCollection:AngularFirestoreCollection<Item>;
   items:Observable<Item[]>;
@@ -20,6 +22,9 @@ export class FotosComponent implements OnInit {
   constructor(private afs:AngularFirestore) {
     this.itemsCollection = this.afs.collection<Item>('img');
     this.items = this.itemsCollection.valueChanges();
+    this.items.forEach(item => {
+      this.lengthItems = item.length;
+    });
   }
 
   ngOnInit() {

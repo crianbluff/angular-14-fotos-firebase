@@ -1,3 +1,7 @@
+<h1 class="text-center">
+  {{ lengthItems }} Imagenes
+</h1>
+
 <div class="card-columns">
   <div class="card" *ngFor="let item of items | async">
     <img [src]="item.url" class="card-img-top" [alt]="item.nombre" [title]="item.nombre">

@@ -79,7 +79,7 @@ export class NgDropFilesDirective {
 
   private _esImagen(tipoArchivo:string):boolean {
     if (tipoArchivo === '' || tipoArchivo === undefined || !tipoArchivo.startsWith('image')) {
-      this.MostrarError(`El formato de archivo ${tipoArchivo} no es valido, debe ser una imagen`);
+      this.MostrarError(`El formato ${tipoArchivo} no es valido, debe ser una imagen`);
       return false;
     } else {
         return true;
