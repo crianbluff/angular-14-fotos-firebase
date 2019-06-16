@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, ElementRef, HostListener, Input, Output } from '@angular/core';
+import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import Swal from 'sweetalert2';
 import { FileItem } from '../models/file-item';
 
@@ -19,20 +19,20 @@ export class NgDropFilesDirective {
   }
 
   @HostListener('dragleave', ['$event'])
-  public onDragLeave(event:any) {
+  public onDragLeave() {
     this.mouseSobre.emit(false);
   }
 
   @HostListener('drop', ['$event'])
   public onDrop(event:any) {
     const transferencia = this._getTransferencia(event);
-
+    this._prevenirDetener(event);
+    this.mouseSobre.emit(false);
+    
     if (!transferencia) {
       return;
     }
     this._extraerArchivos(transferencia.files);
-    this._prevenirDetener(event);
-    this.mouseSobre.emit(false);
   }
 
   private _getTransferencia(event:any) {
@@ -78,7 +78,12 @@ export class NgDropFilesDirective {
   }
 
   private _esImagen(tipoArchivo:string):boolean {
-    return (tipoArchivo === '' || tipoArchivo === undefined) ? false : tipoArchivo.startsWith('image');
+    if (tipoArchivo === '' || tipoArchivo === undefined || !tipoArchivo.startsWith('image')) {
+      this.MostrarError(`El formato de archivo ${tipoArchivo} no es valido, debe ser una imagen`);
+      return false;
+    } else {
+        return true;
+      }
   }
 
   MostrarError(msgError) {

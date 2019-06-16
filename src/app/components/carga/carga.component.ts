@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FileItem } from 'src/app/models/file-item';
 import { CargaImagenesService } from 'src/app/services/carga-imagenes.service';
 
@@ -24,5 +24,21 @@ export class CargaComponent implements OnInit {
   limpiarArchivos() {
     this.archivos = [];
   }
+
+  // @Output() onChange: EventEmitter<File> = new EventEmitter<File>();
+  // updateSource($event: Event) {
+  //   this.projectImage($event.target['files'][0]);
+  // }
+
+  // source:string = '';
+  // projectImage(file: File) {
+  //   let reader = new FileReader;
+  //   reader.onload = (e: any) => {
+  //     this.source = e.target.result;
+  //     this.onChange.emit(file);
+  //   };
+    
+  //   reader.readAsDataURL(file);
+  // }
 
 }

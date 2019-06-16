@@ -20,4 +20,4 @@ const RUTAS:Routes = [
   }
 ];
 
-export const APP_ROUTES = RouterModule.forRoot(RUTAS);
+export const APP_ROUTES = RouterModule.forRoot(RUTAS, { useHash: true });

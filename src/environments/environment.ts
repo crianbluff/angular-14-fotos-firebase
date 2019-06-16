@@ -11,7 +11,6 @@ export const environment = {
     projectId: 'fir-fotos-4cda9',
     storageBucket: 'fir-fotos-4cda9.appspot.com',
     messagingSenderId: '254855078800',
-    // appId: '1:254855078800:web:4943a495d2ac9ce9'
   }
 };
 
