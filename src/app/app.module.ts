@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
 //Rutas
 import { APP_ROUTES } from './app.routes';
@@ -19,22 +19,22 @@ import { CargaImagenesService } from './services/carga-imagenes.service';
 // Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireAuthModule } from '@angular/fire/auth/auth.module';
+import { NoimageDirective } from './directives/noimage.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     FotosComponent,
     CargaComponent,
-    NgDropFilesDirective
+    NgDropFilesDirective,
+    NoimageDirective
   ],
 
   imports: [
     BrowserModule,
     APP_ROUTES,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFirestoreModule
   ],
 
   providers: [

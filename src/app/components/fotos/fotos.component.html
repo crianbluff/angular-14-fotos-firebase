@@ -1,14 +1,29 @@
-<h1 class="text-center">
-  {{ lengthItems }} Imagenes
-</h1>
 
-<div class="card-columns">
-  <div class="card" *ngFor="let item of items | async">
-    <img [src]="item.url" class="card-img-top" [alt]="item.nombre" [title]="item.nombre">
-    <div class="card-body">
-      <h5 class="card-title">
-        {{ item.nombre }}
-      </h5>
+<div *ngIf="lengthItems !== 0">
+  <h1 class="text-center">
+    {{ lengthItems }} Imagenes
+  </h1>
+
+  <div class="card-columns mt-3">
+    <div class="card" *ngFor="let item of items | async">
+      <img noimage [src]="item.url" class="card-img-top" [alt]="item.nombre" [title]="item.nombre">
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ item.nombre }}
+        </h5>
+      </div>
     </div>
+  </div>
+</div>
+
+<div *ngIf="lengthItems == 0">
+  <h1 class="text-center">
+    No hay tarjetas
+  </h1>
+
+  <div class="mt-3 text-center">
+    <a [routerLink]="['/carga']" class="btn btn-outline-primary">
+      Crear tarjetas
+    </a>
   </div>
 </div>
