@@ -11,24 +11,31 @@
       <img src="assets/images/drop-images.png" alt="Cargar Imágen" title="Cargar Imágen">
     </div>
   </div>
-
+  
   <div class="col-md-8">
     <h4>
       Cargar Archivos
     </h4>
 
-    <button type="button" class="btn btn-success" (click)="cargarImagenes()" [disabled]="archivos.length === 0">
+    <button type="button" class="btn btn-success mx-2" (click)="cargarImagenes()" [disabled]="archivos.length === 0">
       Cargar a firebase
     </button>
 
-    <button type="button" class="btn btn-danger" (click)="limpiarArchivos()">
+    <button type="button" class="btn btn-danger mx-2" (click)="limpiarArchivos()">
       Limpiar
+    </button>
+
+    <button type="button" disabled="disabled" class="btn btn-secondary mx-2">
+      {{ archivos.length }}
     </button>
 
     <table class="table">
       <thead class="thead-dark">
         <tr>
-          <th>Nombre Archivo</th>
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Tipo Archivo</th>
           <th>Tamaño</th>
           <th>Progreso</th>
         </tr>
@@ -36,8 +43,20 @@
 
       <tbody>
         <tr *ngFor="let archivo of archivos">
-          <td [ngClass]="{'text-green': archivo.progreso >= 100}" >
+          <td>
+            <img [src]="archivo.urlPrevisualizacion" [alt]="archivo.nombreArchivo" [title]="archivo.nombreArchivo" width="100px">
+          </td>
+          
+          <td>
             {{ archivo.nombreArchivo }}
+          </td>
+
+          <td>
+            <input [(ngModel)]="archivo.desc" #desc="ngModel" [value]="archivo.desc" placeholder="Descripción">
+          </td>
+
+          <td>
+            {{ archivo.tipoArchivo }}
           </td>
 
           <td>
@@ -46,7 +65,7 @@
           
           <td>
             <div class="progress">
-              <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': archivo.progreso + '%' }"></div>
+              <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': archivo.progreso + '%' }" [ngClass]="{'bg-success': archivo.progreso >= 100}"></div>
             </div>
           </td>
         </tr>
@@ -55,9 +74,3 @@
     </table>
   </div>
 </div>
-
-<!-- <i class="material-icons">cloud_upload</i>
-
-<input type="file" accept="image/*" (change)="updateSource($event)">
-
-<img *ngIf="source" [src]="source" src="" class="img-fluid" width="100px"> -->

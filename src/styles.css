@@ -15,13 +15,22 @@
 }
 
 .file-over { 
-	border: dotted 3px #1e90ff; 
+	border: dotted 3px #1e90ff;
 }
 
 .table { 
-	margin-top: 30px; 
+	margin-top: 30px;
 }
 
 .text-green { 
 	color: #008000;
+}
+
+.bg-green {
+	background-color: #008000;
+}
+
+.table thead th {
+	vertical-align: middle;
+	text-align: center;
 }

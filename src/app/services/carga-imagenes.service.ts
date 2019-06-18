@@ -45,7 +45,7 @@ export class CargaImagenesService {
           storageRef.child(`${this.CARPETA_IMAGENES}/${item.nombreArchivo}`).getDownloadURL()
           .then(url => {
             this.guardarImagen({
-              nombre: item.nombreArchivo,
+              desc: item.desc,
               url: url
             });  
             let imagenesCargadas = imagenesCalculo++;
@@ -62,7 +62,7 @@ export class CargaImagenesService {
       }
   }
 
-  private guardarImagen(imagen: { nombre:string, url:string }) {
+  private guardarImagen(imagen: { desc:string, url:string }) {
     this.db.collection(`/${this.CARPETA_IMAGENES}`)
     .add(imagen);
   }

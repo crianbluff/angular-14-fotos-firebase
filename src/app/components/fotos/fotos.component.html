@@ -6,10 +6,10 @@
 
   <div class="card-columns mt-3">
     <div class="card" *ngFor="let item of items | async">
-      <img noimage [src]="item.url" class="card-img-top" [alt]="item.nombre" [title]="item.nombre">
+      <img noimage [src]="item.url" class="card-img-top" [alt]="item.desc" [title]="item.desc">
       <div class="card-body">
-        <h5 class="card-title">
-          {{ item.nombre }}
+        <h5 class="card-title text-center">
+          {{ item.desc ? item.desc : 'Sin Descripción' }}
         </h5>
       </div>
     </div>

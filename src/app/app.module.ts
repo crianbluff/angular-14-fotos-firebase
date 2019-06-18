@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from 'src/environments/environment.prod';
 
 //Rutas
@@ -32,6 +33,8 @@ import { NoimageDirective } from './directives/noimage.directive';
 
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     APP_ROUTES,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
