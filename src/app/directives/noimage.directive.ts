@@ -5,15 +5,14 @@ import { Directive, Input } from '@angular/core';
   host: {
     '(error)':'actualizarUrl()',
     '(cargar)': 'cargar()',
-    '[src]':'src'
-    }
+    '[src]': 'src'
+  }
 })
   
 export class NoimageDirective {
 
-  RutaNoImage = 'assets/images/noimage.jpg';
-
   @Input() src:string;
+  RutaNoImage = 'assets/images/noimage.jpg';
 
   actualizarUrl() {
     this.src = this.RutaNoImage;

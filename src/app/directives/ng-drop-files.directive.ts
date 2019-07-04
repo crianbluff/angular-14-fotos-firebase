@@ -8,6 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class NgDropFilesDirective {
 
+  @Input() urlPrevisualizacion:Object;
   @Input() archivos:FileItem[] = [];
   @Output() mouseSobre:EventEmitter<boolean> = new EventEmitter();
 
@@ -33,11 +34,32 @@ export class NgDropFilesDirective {
     if (!transferencia) {
       return;
     }
+
     this._extraerArchivos(event, transferencia.files);
   }
 
+  @HostListener('change', ['$event'])
+  public onFileChanged(event:Event) {
+    const transferencia = this._getTransferencia(event);
+    if (!transferencia) {
+      return;
+    }
+    this._extraerArchivos(event, transferencia.files);
+  }
+
+  @HostListener('click')
+  public triggerClickFile() {
+   document.getElementById('input-files').click();
+  }
+
   private _getTransferencia(event:any) {
-    return event.dataTransfer ? event.dataTransfer : event.originalEvent.dataTransfer;
+    if (event.dataTransfer) {
+      return event.dataTransfer ? event.dataTransfer : event.originalEvent.dataTransfer;
+    }
+
+    else if (event.target.files) {
+      return event.target ? event.target : event.originalEvent.target;      
+    }
   }
 
   private _extraerArchivos(event:any, archivosLista:FileList) {
@@ -45,8 +67,19 @@ export class NgDropFilesDirective {
     for (const propiedad in Object.getOwnPropertyNames(archivosLista)) {
       const archivoTemporal = archivosLista[propiedad];
       if (this._archivoPuedeSerCargado(archivoTemporal)) {
-        let urlPrevisualizacion = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(event.dataTransfer.files[propiedad]));
-        archivoTemporal['urlPrevisualizacion'] = urlPrevisualizacion;
+        if (event.dataTransfer) {
+          this.urlPrevisualizacion = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(event.dataTransfer.files[propiedad]));
+        }
+        
+        else if (event.target.files) {
+          this.urlPrevisualizacion = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(event.target.files[propiedad]));
+        }
+
+        archivoTemporal['urlPrevisualizacion'] = this.urlPrevisualizacion;
+        let title = '';
+        archivoTemporal['title'] = title;
+        let price = '';
+        archivoTemporal['price'] = price;
         let desc = '';
         archivoTemporal['desc'] = desc;
         let tipoArchivo = archivoTemporal.type;

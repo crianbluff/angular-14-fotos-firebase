@@ -46,6 +46,8 @@ export class CargaImagenesService {
           .then(url => {
             this.guardarImagen({
               desc: item.desc,
+              price: item.price,
+              title: item.title,
               url: url
             });  
             let imagenesCargadas = imagenesCalculo++;
@@ -62,7 +64,7 @@ export class CargaImagenesService {
       }
   }
 
-  private guardarImagen(imagen: { desc:string, url:string }) {
+  private guardarImagen(imagen: { desc:string, price:string, title:string, url:string }) {
     this.db.collection(`/${this.CARPETA_IMAGENES}`)
     .add(imagen);
   }

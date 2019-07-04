@@ -1,19 +1,20 @@
 <div class="row">
-  <div class="col-md-4">
-    <h3>
+  <div class="col-md-12">
+    <h3 class="mb-3 text-center">
       Seleccione Archivos
     </h3>
-
-    <div appNgDropFiles [archivos]="archivos" (mouseSobre)="estaSobreElemento = $event" [ngClass]="{'file-over': estaSobreElemento}" class="well drop-zone">
+    
+    <form appNgDropFiles class="well drop-zone" (mouseSobre)="estaSobreElemento = $event" [archivos]="archivos" [ngClass]="{'file-over': estaSobreElemento}" enctype="multipart/form-data">
+      <input appNgDropFiles type="file" id="input-files" accept="image/*" multiple="multiple" required="required">
       <h4>
-        Deje caer aquí los archivos
+        Haz click para seleccionar tus imagenes o deja caer aquí los archivos.
       </h4>
       <img src="assets/images/drop-images.png" alt="Cargar Imágen" title="Cargar Imágen">
-    </div>
+    </form>
   </div>
   
-  <div class="col-md-8">
-    <h4>
+  <div class="col-md-12 mt-5">
+    <h4 class="mb-3">
       Cargar Archivos
     </h4>
 
@@ -29,48 +30,60 @@
       {{ archivos.length }}
     </button>
 
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th>Imagen</th>
-          <th>Nombre</th>
-          <th>Descripción</th>
-          <th>Tipo Archivo</th>
-          <th>Tamaño</th>
-          <th>Progreso</th>
-        </tr>
-      </thead>
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Tipo Archivo</th>
+            <th>Tamaño</th>
+            <th>Progreso</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        <tr *ngFor="let archivo of archivos">
-          <td>
-            <img [src]="archivo.urlPrevisualizacion" [alt]="archivo.nombreArchivo" [title]="archivo.nombreArchivo" width="100px">
-          </td>
-          
-          <td>
-            {{ archivo.nombreArchivo }}
-          </td>
+        <tbody>
+          <tr *ngFor="let archivo of archivos">
+            <td>
+              <img [src]="archivo.urlPrevisualizacion" [alt]="archivo.nombreArchivo" [title]="archivo.nombreArchivo" width="100px">
+            </td>
+            
+            <td>
+              {{ archivo.nombreArchivo }}
+            </td>
 
-          <td>
-            <input [(ngModel)]="archivo.desc" #desc="ngModel" [value]="archivo.desc" placeholder="Descripción">
-          </td>
+            <td>
+              <input [(ngModel)]="archivo.title" #title="ngModel" [value]="archivo.title" placeholder="Título">
+            </td>
 
-          <td>
-            {{ archivo.tipoArchivo }}
-          </td>
+            <td>
+              <input [(ngModel)]="archivo.desc" #desc="ngModel" [value]="archivo.desc" placeholder="Descripción">
+            </td>
 
-          <td>
-            {{ archivo.archivo.size / 1024 / 1024 | number: '.2-2' }}MB
-          </td>
-          
-          <td>
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': archivo.progreso + '%' }" [ngClass]="{'bg-success': archivo.progreso >= 100}"></div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
+            <td>
+              <input [(ngModel)]="archivo.price" #price="ngModel" [value]="archivo.price" placeholder="Precio">
+            </td>
 
-    </table>
+            <td>
+              {{ archivo.tipoArchivo }}
+            </td>
+
+            <td>
+              {{ archivo.archivo.size / 1024 / 1024 | number: '.2-2' }}MB
+            </td>
+            
+            <td>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': archivo.progreso + '%' }" [ngClass]="{'bg-success': archivo.progreso >= 100}"></div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
   </div>
 </div>

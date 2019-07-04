@@ -1,20 +1,56 @@
 
 <div *ngIf="lengthItems !== 0">
-  <h1 class="text-center">
+  <h1 class="text-center mb-3">
     {{ lengthItems }} Imagenes
   </h1>
 
-  <div class="card-columns mt-3">
-    <div class="card" *ngFor="let item of items | async">
-      <img noimage [src]="item.url" class="card-img-top" [alt]="item.desc" [title]="item.desc">
-      <div class="card-body">
-        <h5 class="card-title text-center">
-          {{ item.desc ? item.desc : 'Sin Descripción' }}
-        </h5>
+  <div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let item of items | async">
+      <div class="mx-auto">
+        <div class="flex items-center justify-center my-4">
+          <div class="w-full">
+            <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+              <img class="img-card" [src]="item.url" noimage>
+              
+              <div class="p-4">
+                <p class="uppercase tracking-wide text-sm font-bold text-gray-700">
+                  {{ item.title ? item.title : 'Sin Título' }}
+                </p>
+
+                <p class="text-3xl text-gray-900">
+                  {{ item.price ? '$ ' + item.price : 'Sin Precio' }}
+                </p>
+
+                <p class="text-gray-700">
+                  {{ item.desc ? item.desc : 'Sin Descripción' }}
+                </p>
+              </div>
+              
+              <div class="px-4 pt-3 pb-4 border-t border-gray-300 bg-gray-100">
+                <div class="text-xs uppercase font-bold text-gray-600 tracking-wide">
+                  Creator
+                </div>
+    
+                <div class="flex items-center pt-2">
+                  <div class="bg-cover bg-center w-10 h-10 rounded-full mr-3" style="background-image: url('http://crianbluff.com/imgs/imgs-general/modals/modal-creator-web/avatar-creator-web/avatar-creator-web.jpg')">
+                </div>
+                
+                <div>
+                  <p class="font-bold text-gray-900">
+                    Cristian Castillo
+                  </p>
+
+                  <p class="text-sm text-gray-700">
+                    (+57) 310 809 87 93
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 <div *ngIf="lengthItems == 0">
   <h1 class="text-center">

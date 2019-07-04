@@ -11,6 +11,7 @@ export class CargaComponent implements OnInit {
 
   estaSobreElemento:boolean = false;
   archivos:FileItem[] = [];
+  urlPrevisualizacion:Object;
   
   constructor(public _cargaImagenes:CargaImagenesService) { }
   
