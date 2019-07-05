@@ -10,10 +10,15 @@ export class CargaImagenesService {
   numeroImagenes = 0;
   almacenarLengthArrayActual = 0;
   almacenarLengthArrayAnterior = 0;
+  cleaner = false;
 
   private CARPETA_IMAGENES = 'img';
 
   constructor(private db:AngularFirestore) { }
+
+  limpiarImagenes() {
+    this.cleaner = true;
+  }
 
   cargarImagenesFirebase(imagenes:FileItem[]) {
     // console.log(imagenes);
@@ -21,12 +26,18 @@ export class CargaImagenesService {
     const storageRef = firebase.storage().ref();
 
     this.almacenarLengthArrayAnterior = this.almacenarLengthArrayActual;
+    if (this.cleaner) {
+      this.almacenarLengthArrayAnterior = 0;
+      this.cleaner = false
+    }
     this.numeroImagenes = imagenes.length - this.almacenarLengthArrayAnterior;
     this.almacenarLengthArrayActual = imagenes.length;
+    // console.log('array anterior', this.almacenarLengthArrayAnterior);
 
-    let imagenesCalculo = this.numeroImagenes - this.numeroImagenes + 1;
+    // let imagenesCalculo = this.numeroImagenes - this.numeroImagenes + 1;
+    let imagenesCalculo = 1;
+
     for ( const item of imagenes ) {
-
       item.estaSubiendo = true;
       if (item.progreso >= 100) {
         continue;
@@ -49,8 +60,10 @@ export class CargaImagenesService {
               price: item.price,
               title: item.title,
               url: url
-            });  
+            });
             let imagenesCargadas = imagenesCalculo++;
+            // console.log('imagenes cargadas', imagenesCargadas);
+            // console.log('numero de imagenes', this.numeroImagenes);
             if ( imagenesCargadas === this.numeroImagenes ) {
               if (imagenes.length > 1) {
                 this.MostrarOk(`${imagenesCargadas} Imagenes cargada a firebase`);
@@ -67,6 +80,15 @@ export class CargaImagenesService {
   private guardarImagen(imagen: { desc:string, price:string, title:string, url:string }) {
     this.db.collection(`/${this.CARPETA_IMAGENES}`)
     .add(imagen);
+  }
+  
+  eliminarImagen(key:any) {
+    this.db.collection('img').doc(key).delete().then(function() {
+      // console.log('Eliminado');
+      this.MostrarOk('Imagen Eliminada');
+    }).catch(function(error) {
+        console.log('Error: ', error);
+      });    
   }
 
   MostrarOk(msgSuccess) {

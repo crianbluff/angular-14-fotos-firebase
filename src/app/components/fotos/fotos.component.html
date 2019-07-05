@@ -1,15 +1,35 @@
+<div *ngIf="lengthItems == 0">
+  <h1 class="text-center">
+    No hay tarjetas
+  </h1>
+
+  <div class="mt-3 text-center">
+    <a [routerLink]="['/carga']" class="btn btn-outline-primary">
+      Crear tarjetas
+    </a>
+  </div>
+</div>
 
 <div *ngIf="lengthItems !== 0">
-  <h1 class="text-center mb-3">
-    {{ lengthItems }} Imagenes
+  <h1 class="text-center mb-3" *ngIf="lengthItems === 1">
+    {{ lengthItems }} Imagen
+  </h1>
+
+  <h1 class="text-center mb-3" *ngIf="lengthItems > 1">
+    {{ lengthItems }} Imágenes
   </h1>
 
   <div class="row">
-    <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let item of items | async">
+    <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let item of items | async" (click)="eliminarImagen(item.id)">
       <div class="mx-auto">
         <div class="flex items-center justify-center my-4">
           <div class="w-full">
-            <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+            <div class="bg-white shadow-xl rounded-lg overflow-hidden position-relative">
+              <div class="ctn-icons">
+                <i class="fa fa-trash" title="Eliminar Imagen" data-id="GOSu4doeXlFuveAfqACi" (click)="eliminarImagen($event)"></i>
+                <i class="fa fa-camera"></i>
+              </div>
+
               <img class="img-card" [src]="item.url" noimage>
               
               <div class="p-4">
@@ -50,16 +70,5 @@
         </div>
       </div>
     </div>
-  </div>
-
-<div *ngIf="lengthItems == 0">
-  <h1 class="text-center">
-    No hay tarjetas
-  </h1>
-
-  <div class="mt-3 text-center">
-    <a [routerLink]="['/carga']" class="btn btn-outline-primary">
-      Crear tarjetas
-    </a>
   </div>
 </div>

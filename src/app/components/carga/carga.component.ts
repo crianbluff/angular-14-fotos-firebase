@@ -15,7 +15,7 @@ export class CargaComponent implements OnInit {
   
   constructor(public _cargaImagenes:CargaImagenesService) { }
   
-  ngOnInit() {
+  ngOnInit() {    
   }
   
   cargarImagenes() {
@@ -23,6 +23,7 @@ export class CargaComponent implements OnInit {
   }
 
   limpiarArchivos() {
+    this._cargaImagenes.limpiarImagenes();
     this.archivos = [];
   }
 

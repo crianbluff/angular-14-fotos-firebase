@@ -4,20 +4,18 @@
       Seleccione Archivos
     </h3>
     
-    <form appNgDropFiles class="well drop-zone" (mouseSobre)="estaSobreElemento = $event" [archivos]="archivos" [ngClass]="{'file-over': estaSobreElemento}" enctype="multipart/form-data">
-      <input appNgDropFiles type="file" id="input-files" accept="image/*" multiple="multiple" required="required">
-      <h4>
-        Haz click para seleccionar tus imagenes o deja caer aquí los archivos.
-      </h4>
-      <img src="assets/images/drop-images.png" alt="Cargar Imágen" title="Cargar Imágen">
+    <form enctype="multipart/form-data">
+      <label class="label" [ngClass]="{'file-over': estaSobreElemento}">
+        <span class="title">
+          Haz click para seleccionar tus imagenes o deja caer aquí los archivos.
+        </span>
+        <img src="assets/images/drop-images.png" alt="Cargar Imágen" title="Cargar Imágen">
+        <input type="file" appNgDropFiles (mouseSobre)="estaSobreElemento = $event" [archivos]="archivos" accept="image/*" multiple="multiple" required="required">
+      </label>
     </form>
   </div>
   
   <div class="col-md-12 mt-5">
-    <h4 class="mb-3">
-      Cargar Archivos
-    </h4>
-
     <button type="button" class="btn btn-success mx-2" (click)="cargarImagenes()" [disabled]="archivos.length === 0">
       Cargar a firebase
     </button>
