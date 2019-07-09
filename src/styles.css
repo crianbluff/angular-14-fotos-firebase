@@ -23,13 +23,17 @@
 	text-align: center;
 }
 
+.btn:focus {
+	box-shadow: 0 0 0;
+}
+
 .shadow-xl {
 	box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3),
 							0 10px 10px -5px rgba(0,0,0,0.1) !important;
 }
 
 .ctn-icons {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
   display: flex;
   justify-content: space-between;
   padding: 15px;
@@ -39,11 +43,35 @@
 }
 
 .ctn-icons i {
-	background-color: rgba(0, 0, 0, 0.3);
+	background-color: rgba(0, 0, 0, 0.6);
 	border-radius: 50%;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 	cursor: pointer;
-  padding: 10px;
+	padding: 10px;
+}
+
+.ctn-icons .icon-remove:before {
+	display: block;
+	transition: transform 0.3s ease-in-out;
+}
+
+.ctn-icons .icon-remove {
+	transition: background-color 0.3s ease-in-out,
+							box-shadow 0.3s ease-in-out;
+}
+
+.ctn-icons .icon-remove:hover:before,
+.ctn-icons .icon-remove:focus:before,
+.ctn-icons .icon-remove:active:before {
+	transform: rotateY(360deg);
+}
+
+.ctn-icons .icon-remove:hover,
+.ctn-icons .icon-remove:focus,
+.ctn-icons .icon-remove:active {
+	background-color: rgba(255, 46, 46, 0.6);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3),
+							0 0 0 1px #ffffff inset;
 }
 
 .img-card {
@@ -62,7 +90,7 @@
   padding: 1rem 1.5rem;
   position: relative;
   text-align: center;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease-in;
 }
 
 .label:hover,
@@ -73,13 +101,13 @@
 .label .title {
 	color: #999999;
 	font-size: 1.25rem;
-	transition: color 0.3s ease;
+	transition: color 0.3s ease-in;
 }
 
 .label img {
 	opacity: 0.5;
-	transition: filter 0.3s ease,
-							opacity 0.3s ease;
+	transition: filter 0.3s ease-in,
+							opacity 0.3s ease-in;
 }
 
 .label:hover .title,

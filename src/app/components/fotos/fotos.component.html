@@ -20,29 +20,29 @@
   </h1>
 
   <div class="row">
-    <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let item of items | async" (click)="eliminarImagen(item.id)">
+    <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let item of images">
       <div class="mx-auto">
         <div class="flex items-center justify-center my-4">
           <div class="w-full">
             <div class="bg-white shadow-xl rounded-lg overflow-hidden position-relative">
               <div class="ctn-icons">
-                <i class="fa fa-trash" title="Eliminar Imagen" data-id="GOSu4doeXlFuveAfqACi" (click)="eliminarImagen($event)"></i>
+                <i class="fa fa-trash icon-remove" title="Eliminar Imagen" [id]="item.payload.doc.id" (click)="eliminarImagen($event)"></i>
                 <i class="fa fa-camera"></i>
               </div>
 
-              <img class="img-card" [src]="item.url" noimage>
-              
+              <img class="img-card" [src]="item.payload.doc.data().url" noimage>
+
               <div class="p-4">
                 <p class="uppercase tracking-wide text-sm font-bold text-gray-700">
-                  {{ item.title ? item.title : 'Sin Título' }}
+                  {{ item.payload.doc.data().title ? item.payload.doc.data().title : 'Sin Título' }}
                 </p>
 
                 <p class="text-3xl text-gray-900">
-                  {{ item.price ? '$ ' + item.price : 'Sin Precio' }}
+                  {{ item.payload.doc.data().price ? '$ ' + item.payload.doc.data().price : 'Sin Precio' }}
                 </p>
 
                 <p class="text-gray-700">
-                  {{ item.desc ? item.desc : 'Sin Descripción' }}
+                  {{ item.payload.doc.data().desc ? item.payload.doc.data().desc : 'Sin Descripción' }}
                 </p>
               </div>
               

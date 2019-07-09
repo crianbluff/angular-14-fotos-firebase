@@ -66,10 +66,10 @@ export class CargaImagenesService {
             // console.log('numero de imagenes', this.numeroImagenes);
             if ( imagenesCargadas === this.numeroImagenes ) {
               if (imagenes.length > 1) {
-                this.MostrarOk(`${imagenesCargadas} Imagenes cargada a firebase`);
+                this.mostrarOk(`${imagenesCargadas} Imagenes cargada a firebase`);
               }
               else if (imagenes.length <= 1) {
-                this.MostrarOk('Imagen cargada a firebase');
+                this.mostrarOk('Imagen cargada a firebase');
               }
             }
           });
@@ -78,20 +78,50 @@ export class CargaImagenesService {
   }
 
   private guardarImagen(imagen: { desc:string, price:string, title:string, url:string }) {
+    // console.log(imagen);
     this.db.collection(`/${this.CARPETA_IMAGENES}`)
     .add(imagen);
   }
   
   eliminarImagen(key:any) {
-    this.db.collection('img').doc(key).delete().then(function() {
-      // console.log('Eliminado');
-      this.MostrarOk('Imagen Eliminada');
-    }).catch(function(error) {
-        console.log('Error: ', error);
-      });    
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success mx-2',
+        cancelButton: 'btn btn-danger mx-2'
+      },
+      buttonsStyling: false,
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Estas seguro?',
+      text: '¡No podrás revertir esto!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, eliminarla!',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        swalWithBootstrapButtons.fire(
+          'Eliminada!',
+          'La tarjeta ha sido eliminada.',
+          'success'
+        );
+        this.db.collection('img').doc(key).delete().then(function() {
+        }).catch(function(error) {
+            console.log('Error: ', error);
+          });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire(
+            'Cancelada',
+            'Tu tarjeta esta segura :)',
+            'error'
+          );
+        }
+    });
   }
 
-  MostrarOk(msgSuccess) {
+  mostrarOk(msgSuccess) {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',

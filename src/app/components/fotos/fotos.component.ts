@@ -16,6 +16,7 @@ export interface Item {
 export class FotosComponent implements OnInit {
   
   lengthItems:number;
+  images:any;
 
   private itemsCollection:AngularFirestoreCollection<Item>;
   items:Observable<Item[]>;
@@ -28,13 +29,21 @@ export class FotosComponent implements OnInit {
     });
   }
 
+  getImages () {
+    this.afs.collection('img').snapshotChanges()
+    .subscribe( res => {
+      this.images = res;
+    }); 
+  }
+
   eliminarImagen(event) {
-    let key = event.target.dataset.id;
+    let key = event.target.id;
     this._cargaImagenes.eliminarImagen(key);
 
   }
 
   ngOnInit() {
+    this.getImages();
   }
 
 }

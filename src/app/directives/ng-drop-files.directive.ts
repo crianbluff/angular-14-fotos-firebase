@@ -59,7 +59,7 @@ export class NgDropFilesDirective {
   }
 
   private _extraerArchivos(event:any, archivosLista:FileList) {
-    console.log(archivosLista);
+    // console.log(archivosLista);
     for (const propiedad in Object.getOwnPropertyNames(archivosLista)) {
       const archivoTemporal = archivosLista[propiedad];
       if (this._archivoPuedeSerCargado(archivoTemporal)) {
@@ -102,7 +102,7 @@ export class NgDropFilesDirective {
   }
 
   private _archivoYaFueDroppeado(nombreArchivo:string):boolean {
-    console.log(nombreArchivo);
+    // console.log(nombreArchivo);
     for ( const archivo of this.archivos ) {
       if ( archivo.nombreArchivo === nombreArchivo ) {
         this.MostrarError(`El archivo ${nombreArchivo} ya esta agregado`);
