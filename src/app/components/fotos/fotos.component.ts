@@ -39,7 +39,7 @@ export class FotosComponent implements OnInit {
   verImagen(event) {
     const modal = document.getElementById('modal-lightbox');
     let imgModal = modal.querySelector('.ctn-modal-lightbox .modal-lightbox-body img');
-    let pathImage = event.target.parentElement.parentElement.children[1].src;
+    let pathImage = event.target.parentElement.parentElement.style.backgroundImage.slice(5, -2).replace(/'/g);
     imgModal.setAttribute('src', pathImage)
     modal.classList.add('show-modal-lightbox');
     document.body.classList.add('no-scroll-y');

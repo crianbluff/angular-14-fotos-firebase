@@ -25,12 +25,12 @@
         <div class="flex items-center justify-center my-4">
           <div class="w-full">
             <div class="bg-white shadow-xl rounded-lg overflow-hidden position-relative">
-              <div class="ctn-icons">
-                <i class="fa fa-trash icon-remove" title="Eliminar Imagen" [id]="item.payload.doc.id" (click)="eliminarImagen($event)"></i>
-                <i class="fa fa-camera icon-view" title="Ver Imagen" (click)="verImagen($event)"></i>
+              <div class="bg-cover bg-center h-56 p-4" [ngStyle]="{'background-image': 'url(' + item.payload.doc.data().url + ')'}">
+                <div class="ctn-icons">
+                  <i class="fa fa-trash icon-remove" title="Eliminar Imagen" [id]="item.payload.doc.id" (click)="eliminarImagen($event)"></i>
+                  <i class="fa fa-camera icon-view" title="Ver Imagen" (click)="verImagen($event)"></i>
+                </div>
               </div>
-
-              <img class="img-card" [src]="item.payload.doc.data().url" noimage>
 
               <div class="p-4">
                 <p class="uppercase tracking-wide text-sm font-bold text-gray-700">

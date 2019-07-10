@@ -24,7 +24,6 @@
 
 .table thead th {
 	vertical-align: middle;
-	text-align: center;
 }
 
 .btn:focus {
@@ -39,7 +38,8 @@
 .ctn-icons {
   color: rgba(255, 255, 255, 0.9);
   display: flex;
-  justify-content: space-between;
+	justify-content: space-between;
+	left: 0;
   padding: 15px;
   position: absolute;
   top: 0;
@@ -104,15 +104,12 @@
 }
 
 .label {
-	align-items: center;
   border: 3px dashed #999999;
 	border-radius: 5px;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
   padding: 1rem 1.5rem;
-  position: relative;
-  text-align: center;
+	position: relative;
+	text-align: center;
   transition: border-color 0.3s ease-in;
 }
 
@@ -128,6 +125,7 @@
 }
 
 .label img {
+	margin: auto;
 	opacity: 0.5;
 	transition: filter 0.3s ease-in,
 							opacity 0.3s ease-in;
@@ -156,9 +154,7 @@ input[type=file] {
 }
 
 .modal-lightbox {
-	align-items: center;
 	background-color: rgba(0, 0, 0, 0.7);
-	display: flex;
 	height: 100%;
 	left: 0;
 	opacity: 0;

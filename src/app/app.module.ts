@@ -20,15 +20,13 @@ import { CargaImagenesService } from './services/carga-imagenes.service';
 // Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { NoimageDirective } from './directives/noimage.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     FotosComponent,
     CargaComponent,
-    NgDropFilesDirective,
-    NoimageDirective
+    NgDropFilesDirective
   ],
 
   imports: [
