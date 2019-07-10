@@ -21,13 +21,13 @@
 
   <div class="row">
     <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let item of images">
-      <div class="mx-auto">
+      <div class="mx-auto" id="gallery">
         <div class="flex items-center justify-center my-4">
           <div class="w-full">
             <div class="bg-white shadow-xl rounded-lg overflow-hidden position-relative">
               <div class="ctn-icons">
                 <i class="fa fa-trash icon-remove" title="Eliminar Imagen" [id]="item.payload.doc.id" (click)="eliminarImagen($event)"></i>
-                <i class="fa fa-camera"></i>
+                <i class="fa fa-camera icon-view" title="Ver Imagen" (click)="verImagen($event)"></i>
               </div>
 
               <img class="img-card" [src]="item.payload.doc.data().url" noimage>
@@ -71,4 +71,16 @@
       </div>
     </div>
   </div>
+</div>
+
+<div id="modal-lightbox" class="modal-lightbox" (click)="cerrarModalClickFuera($event)">
+	<div class="ctn-modal-lightbox" (click)="stopPropagation($event)">
+		<div id="close-modal-lightbox" class="close-modal-lightbox" (click)="closeModal()">
+			<i class="fa fa-times"></i>
+		</div>
+
+		<div class="modal-lightbox-body">
+			<img>
+		</div>
+	</div>
 </div>
