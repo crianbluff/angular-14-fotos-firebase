@@ -50,7 +50,7 @@ export class CargaImagenesService {
       .put(item.archivo);
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
         (snapshot:firebase.storage.UploadTaskSnapshot) => item.progreso = (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
-        (error) => console.error('Error al subir', error),
+        (error) => console.error('Error trying to upload', error),
         () => {
           item.estaSubiendo = false;
           storageRef.child(`${this.CARPETA_IMAGENES}/${item.nombreArchivo}`).getDownloadURL()
@@ -66,10 +66,10 @@ export class CargaImagenesService {
             // console.log('numero de imagenes', this.numeroImagenes);
             if ( imagenesCargadas === this.numeroImagenes ) {
               if (imagenes.length > 1) {
-                this.mostrarOk(`${imagenesCargadas} Imagenes cargada a firebase`);
+                this.mostrarOk(`${imagenesCargadas} Images have been uploaded to firebase successfully`);
               }
               else if (imagenes.length <= 1) {
-                this.mostrarOk('Imagen cargada a firebase');
+                this.mostrarOk('The image has been uploaded to firebase successfully');
               }
             }
           });
@@ -93,18 +93,18 @@ export class CargaImagenesService {
     })
     
     swalWithBootstrapButtons.fire({
-      title: 'Estas seguro?',
-      text: '¡No podrás revertir esto!',
+      title: 'Are you sure?',
+      text: '¡You cannot revert this!',
       type: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Si, eliminarla!',
-      cancelButtonText: 'No, cancelar!',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel it!',
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
         swalWithBootstrapButtons.fire(
-          'Eliminada!',
-          'La tarjeta ha sido eliminada.',
+          'Deleted!',
+          'The card has been deleted successfully.',
           'success'
         );
         this.db.collection('img').doc(key).delete().then(function() {
@@ -113,8 +113,8 @@ export class CargaImagenesService {
           });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
           swalWithBootstrapButtons.fire(
-            'Cancelada',
-            'Tu tarjeta esta segura :)',
+            'Cancelled',
+            'Your card is safe :)',
             'error'
           );
         }

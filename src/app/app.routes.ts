@@ -1,22 +1,22 @@
-import { Routes, RouterModule, Router } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { FotosComponent } from './components/fotos/fotos.component';
 import { CargaComponent } from './components/carga/carga.component';
 
 const RUTAS:Routes = [
   {
-    path: 'fotos',
+    path: 'photos',
     component: FotosComponent
   },
 
   {
-    path: 'carga',
+    path: 'upload',
     component: CargaComponent
   },
 
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: 'fotos'
+    redirectTo: 'photos'
   }
 ];
 

@@ -1,15 +1,15 @@
 <div class="row">
   <div class="col-md-12">
     <h3 class="mb-3 text-center">
-      Seleccione Archivos
+      Select Your Images
     </h3>
     
     <form enctype="multipart/form-data">
       <label class="label" [ngClass]="{'file-over': estaSobreElemento}">
         <span class="title">
-          Haz click para seleccionar tus imagenes o deja caer aquí los archivos.
+          Click to select your images or drop here your images.
         </span>
-        <img src="assets/images/drop-images.png" alt="Cargar Imágen" title="Cargar Imágen">
+        <img src="assets/images/drop-images.png" alt="Upload Photo" title="Upload Photo">
         <input type="file" appNgDropFiles (mouseSobre)="estaSobreElemento = $event" [archivos]="archivos" accept="image/*" multiple="multiple" required="required">
       </label>
     </form>
@@ -17,11 +17,11 @@
   
   <div class="col-md-12 mt-5">
     <button type="button" class="btn btn-success mx-2" (click)="cargarImagenes()" [disabled]="archivos.length === 0">
-      Cargar a firebase
+      Upload to firebase
     </button>
 
     <button type="button" class="btn btn-danger mx-2" (click)="limpiarArchivos()">
-      Limpiar
+      Clean
     </button>
 
     <button type="button" disabled="disabled" class="btn btn-secondary mx-2">
@@ -32,14 +32,14 @@
       <table class="table">
         <thead class="thead-dark">
           <tr>
-            <th>Imagen</th>
-            <th>Nombre</th>
-            <th>Título</th>
-            <th>Descripción</th>
-            <th>Precio</th>
-            <th>Tipo Archivo</th>
-            <th>Tamaño</th>
-            <th>Progreso</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>File Type</th>
+            <th>Size</th>
+            <th>Progress</th>
           </tr>
         </thead>
 
@@ -54,15 +54,15 @@
             </td>
 
             <td>
-              <input [(ngModel)]="archivo.title" #title="ngModel" [value]="archivo.title" placeholder="Título">
+              <input [(ngModel)]="archivo.title" #title="ngModel" [value]="archivo.title" placeholder="Title">
             </td>
 
             <td>
-              <input [(ngModel)]="archivo.desc" #desc="ngModel" [value]="archivo.desc" placeholder="Descripción">
+              <input [(ngModel)]="archivo.desc" #desc="ngModel" [value]="archivo.desc" placeholder="Description">
             </td>
 
             <td>
-              <input [(ngModel)]="archivo.price" #price="ngModel" [value]="archivo.price" placeholder="Precio">
+              <input [(ngModel)]="archivo.price" #price="ngModel" [value]="archivo.price" placeholder="Price">
             </td>
 
             <td>

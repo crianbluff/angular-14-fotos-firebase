@@ -105,7 +105,7 @@ export class NgDropFilesDirective {
     // console.log(nombreArchivo);
     for ( const archivo of this.archivos ) {
       if ( archivo.nombreArchivo === nombreArchivo ) {
-        this.MostrarError(`El archivo ${nombreArchivo} ya esta agregado`);
+        this.MostrarError(`The file ${nombreArchivo} is already uploaded`);
         return true;
       }
     }
@@ -114,7 +114,7 @@ export class NgDropFilesDirective {
 
   private _esImagen(tipoArchivo:string):boolean {
     if (tipoArchivo === '' || tipoArchivo === undefined || !tipoArchivo.startsWith('image')) {
-      this.MostrarError(`El formato ${tipoArchivo} no es valido, debe ser una imagen`);
+      this.MostrarError(`The format type ${tipoArchivo} is not valid, it hast to be an image`);
       return false;
     } else {
         return true;
